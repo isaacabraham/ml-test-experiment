@@ -1,0 +1,5 @@
+source https://www.nuget.org/api/v2
+generate_load_scripts: true
+storage: none
+nuget FSharp.Data prerelease
+nuget Microsoft.ML
