@@ -1,12 +1,12 @@
 #r "netstandard"
-#load @".paket\load\netstandard2.0\main.group.fsx"
+#load @".paket/load/netstandard2.0/main.group.fsx"
 #load "mlfs.fsx"
 
 open FSharp.Data
 open Microsoft.ML
 
 // 1. Get our data - could be from any source, in this case from a CSV file. This is completely decoupled from the ML library.
-type SentimentData = CsvProvider< const (__SOURCE_DIRECTORY__ + @"\data\imdb_labelled.txt"), Separators="\t", HasHeaders=true, IgnoreErrors = true>
+type SentimentData = CsvProvider< const (__SOURCE_DIRECTORY__ + @"/data/imdb_labelled.txt"), Separators="\t", HasHeaders=true, IgnoreErrors = true>
 let imdbData = SentimentData.GetSample()
 
 
@@ -25,8 +25,8 @@ let imdbData = SentimentData.GetSample()
 
 
 // We can easily work with multiple data sources and e.g. concatinate them.
-let yelpData = SentimentData.Load (__SOURCE_DIRECTORY__ + @"\data\yelp_labelled.txt")
-let amazonCells = SentimentData.Load (__SOURCE_DIRECTORY__ + @"\data\amazon_cells_labelled.txt")
+let yelpData = SentimentData.Load (__SOURCE_DIRECTORY__ + @"/data/yelp_labelled.txt")
+let amazonCells = SentimentData.Load (__SOURCE_DIRECTORY__ + @"/data/amazon_cells_labelled.txt")
 
 let allData =
     [ yield! imdbData.Rows
