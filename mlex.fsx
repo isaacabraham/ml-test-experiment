@@ -6,7 +6,7 @@ open FSharp.Data
 open Microsoft.ML
 
 // 1. Get our data - could be from any source, in this case from a CSV file. This is completely decoupled from the ML library.
-type SentimentData = CsvProvider< @"C:\Users\Isaac\Source\Repos\ml-test\data\imdb_labelled.txt", Separators="\t", HasHeaders=true, IgnoreErrors = true>
+type SentimentData = CsvProvider< const (__SOURCE_DIRECTORY__ + @"\data\imdb_labelled.txt"), Separators="\t", HasHeaders=true, IgnoreErrors = true>
 let imdbData = SentimentData.GetSample()
 
 
@@ -25,15 +25,13 @@ let imdbData = SentimentData.GetSample()
 
 
 // We can easily work with multiple data sources and e.g. concatinate them.
-let yelpData = SentimentData.Load @"C:\Users\Isaac\Source\Repos\ml-test\data\yelp_labelled.txt"
-let amazonCells = SentimentData.Load @"C:\Users\Isaac\Source\Repos\ml-test\data\amazon_cells_labelled.txt"
+let yelpData = SentimentData.Load (__SOURCE_DIRECTORY__ + @"\data\yelp_labelled.txt")
+let amazonCells = SentimentData.Load (__SOURCE_DIRECTORY__ + @"\data\amazon_cells_labelled.txt")
 
 let allData =
-    [ imdbData.Rows
-      yelpData.Rows
-      amazonCells.Rows ]
-    |> Seq.concat
-    |> Seq.toList
+    [ yield! imdbData.Rows
+      yield! yelpData.Rows
+      yield! amazonCells.Rows ]
 
 
 
