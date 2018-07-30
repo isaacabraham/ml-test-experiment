@@ -9,9 +9,9 @@ Unix:
 
     mono .paket/paket.exe update
 
-Then edit and execute [mlnet.fsx](blob/master/mlnet.fsx).
+Then edit and execute [mlnet.fsx](mlnet.fsx).
 
-In [mlfs.fsx](blob/master/mlfs.fsx) there are samples of how to wrap the ML.NET API in F# helpers. There is no plan to add these to ML.NET directly, they are just there for demonstration.
+In [mlfs.fsx](mlfs.fsx) there are samples of how to wrap the ML.NET API in F# helpers. There is no plan to add these to ML.NET directly, they are just there for demonstration.
 
 The use of classes for data is needed because of [this issue with ML.NET](https://github.com/dotnet/machinelearning/issues/180).
 
